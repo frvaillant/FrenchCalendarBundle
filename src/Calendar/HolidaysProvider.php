@@ -129,7 +129,13 @@ class HolidaysProvider implements HolidaysProviderInterface
         }
 
         $uniqueHolidays = [];
+
         foreach ($holidays as $holiday) {
+
+            if(!isset($holiday['start_date'])) {
+                continue;
+            }
+
             $desc = $holiday['description'];
             if (!isset($uniqueHolidays[$desc])) {
 
