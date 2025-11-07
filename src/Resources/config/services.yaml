@@ -1,0 +1,17 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  Francoisvaillant\CalendarBundle\:
+    resource: '../../*'
+    exclude: '../../{DependencyInjection,Entity,Tests,Kernel.php}'
+
+  Francoisvaillant\CalendarBundle\Calendar\PublicHolidaysProvider:
+    arguments:
+      $publicHolidaysUrl: '%calendar.public_holidays_url%'
+
+  Francoisvaillant\CalendarBundle\Calendar\HolidaysProvider:
+    arguments:
+      $holidaysUrl: '%calendar.holidays_url%'
