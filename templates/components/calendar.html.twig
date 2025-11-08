@@ -1,0 +1,44 @@
+
+<div class="calendar-bundle-container" data-controller="calendar-bundle">
+
+    {% for monthnumber, month in calendar %}
+    <h1>
+        {{ month.name }}
+    </h1>
+    <table>
+        <thead>
+            <tr>
+                <th class="calendar-bundle-week-title">sem</th>
+                {% for day in days_of_week() %}
+                    <th class="calendar-bundle-day-title">{{ day }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+
+        {% set weeks = month.weeks %}
+
+        <tbody>
+            {% for week_number, days in weeks %}
+                <tr class="calendar-bundle-week">
+                    <td class="calendar-bundle-week-number">
+                        {{ week_number }}
+                    </td>
+                    {% for day in days %}
+                        <td
+                            id="{{ day ? day.date | date('Ymd') }}"
+                            class="calendar-bundle-day"
+                            {{ day and day.isHoliday ? 'data-holiday="true"' }}
+                            {{ day and day.isPublicHoliday ? 'data-public-holiday="true"' }}
+                        >
+                            {% if day %}
+                                {{ day.date | date('d') }}
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+    {% endfor %}
+</div>

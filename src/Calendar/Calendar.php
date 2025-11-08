@@ -47,7 +47,7 @@ class Calendar
     }
 
 
-    public function formatAsMonths(?int $monthNumber = null): array
+    public function formatAsMonths(?int $chosenMonth = null): array
     {
         if(!$this->dates) {
             throw new \Exception('No dates provided. use setDates() to provide dates');
@@ -91,6 +91,10 @@ class Calendar
 
                 $months[$monthNumber]['weeks'][$weekNumber][$dayCode] = $dayInfo;
             }
+        }
+
+        if ($chosenMonth) {
+            return [$chosenMonth => $months[$chosenMonth]];
         }
 
         return $months;
