@@ -66,19 +66,26 @@ class CalendarProvider implements CalendarInterface
         /**
          * @var int $weekNumber
          * @var Day[] $days
+         *
+         * Loop in a year
          */
         foreach ($calendar as $weekNumber => &$days) {
 
             /**
              * @var  string $dateKey
              * @var Day $dayInfo
+             *
+             * loop in a week
              */
             foreach ($days as $dateKey => $dayInfo) {
+
+                /** Check if date is a public holiday */
                 if (isset($publicHolidays[$dateKey])) {
                     $dayInfo->setIsPublicHoliday(true);
                     $dayInfo->setPublicHolidayName($publicHolidays[$dateKey]['name']);
                 }
 
+                /** check if date is in holiday */
                 if (isset($holidays[$dateKey])) {
                     $dayInfo->setIsHoliday(true);
                     $dayInfo->setHolidayName($holidays[$dateKey]);
