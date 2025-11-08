@@ -52,3 +52,8 @@ Vous obtenez un tableau de jours regroupés par numéro de semaine :
       "holiday_name" => "Vacances de Noël 2024"
     ]
 ```
+
+
+# Docs
+https://data.education.gouv.fr/explore/dataset/fr-en-calendrier-scolaire/api/?disjunctive.description&disjunctive.location&disjunctive.zones&disjunctive.annee_scolaire&disjunctive.population&refine.zones=Zone+A&refine.description=Vacances+de+No%C3%ABl&refine.start_date=2024  
+https://www.data.gouv.fr/dataservices/jours-feries/
