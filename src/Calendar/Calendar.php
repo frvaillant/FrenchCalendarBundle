@@ -12,6 +12,12 @@ class Calendar
 
     private ?array $dates = null;
 
+    private string $format = self::AS_WEEKS;
+
+    const AS_DAYS = 'days';
+    const AS_WEEKS  = 'weeks';
+    const AS_MONTHS = 'months';
+
     public function getDates(?int $weekNumber = null): array
     {
         return $weekNumber ? $this->dates[$weekNumber] : $this->dates;
@@ -20,6 +26,16 @@ class Calendar
     public function setDates(array $dates): void
     {
         $this->dates = $dates;
+    }
+
+    public function getFormat(): string
+    {
+        return $this->format;
+    }
+
+    public function setFormat(string $format): void
+    {
+        $this->format = $format;
     }
 
     /**
@@ -51,7 +67,6 @@ class Calendar
         return $calendar;
     }
 
-
     /**
      * @param int|null $chosenMonth
      *
@@ -59,7 +74,7 @@ class Calendar
      *
      * @throws \Exception
      */
-    public function getCalendar(?int $chosenMonth = null): array
+    private function formatAsMonth(?int $chosenMonth = null): array
     {
         if(!$this->dates) {
             throw new \Exception('No dates provided. use setDates() to provide dates');
@@ -112,7 +127,19 @@ class Calendar
 
     }
 
-
-
+    /**
+     * @return array|array[]
+     *
+     * @throws \Exception
+     */
+    public function getCalendar(): array
+    {
+        return match ($this->format) {
+            self::AS_DAYS => $this->dates,
+            self::AS_WEEKS => $this->formatAsWeeks(),
+            self::AS_MONTHS => $this->formatAsMonth(),
+            default => throw new \Exception('Invalid format'),
+        };
+    }
 
 }
