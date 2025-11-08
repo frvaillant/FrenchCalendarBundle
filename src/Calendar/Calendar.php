@@ -43,7 +43,7 @@ class Calendar
      *
      * @throws \Exception
      */
-    private function formatAsWeeks(): array
+    private function formatAsWeeks(?int $chosenWeek = null): array
     {
         if(!$this->dates) {
             throw new \Exception('No dates provided. use setDates() to provide dates');
@@ -62,6 +62,10 @@ class Calendar
                 ->setDates($dates)
             ;
             $calendar[$week->getNumber()] = $week->build();
+        }
+
+        if ($chosenWeek) {
+            return [$chosenWeek => $calendar[$chosenWeek]];
         }
 
         return $calendar;
@@ -128,16 +132,18 @@ class Calendar
     }
 
     /**
+     * @param int|null $chosenPeriod // i.e month or week number. e.g. 1 for january if you chose format AS_MONTHS
+     *
      * @return array|array[]
      *
      * @throws \Exception
      */
-    public function getCalendar(): array
+    public function getCalendar(?int $chosenPeriod = null): array
     {
         return match ($this->format) {
             self::AS_DAYS => $this->dates,
-            self::AS_WEEKS => $this->formatAsWeeks(),
-            self::AS_MONTHS => $this->formatAsMonth(),
+            self::AS_WEEKS => $this->formatAsWeeks($chosenPeriod),
+            self::AS_MONTHS => $this->formatAsMonth($chosenPeriod),
             default => throw new \Exception('Invalid format'),
         };
     }
