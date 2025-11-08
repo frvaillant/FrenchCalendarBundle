@@ -12,9 +12,9 @@ class Calendar
 
     private ?array $dates = null;
 
-    public function getDates(): array
+    public function getDates(?int $weekNumber = null): array
     {
-        return $this->dates;
+        return $weekNumber ? $this->dates[$weekNumber] : $this->dates;
     }
 
     public function setDates(array $dates): void
@@ -22,7 +22,12 @@ class Calendar
         $this->dates = $dates;
     }
 
-    public function formatAsWeeks(): array
+    /**
+     * @return array
+     *
+     * @throws \Exception
+     */
+    private function formatAsWeeks(): array
     {
         if(!$this->dates) {
             throw new \Exception('No dates provided. use setDates() to provide dates');
@@ -47,12 +52,18 @@ class Calendar
     }
 
 
-    public function formatAsMonths(?int $chosenMonth = null): array
+    /**
+     * @param int|null $chosenMonth
+     *
+     * @return array|array[]
+     *
+     * @throws \Exception
+     */
+    public function getCalendar(?int $chosenMonth = null): array
     {
         if(!$this->dates) {
             throw new \Exception('No dates provided. use setDates() to provide dates');
         }
-
 
         $weeks = $this->formatAsWeeks();
         $months = [];
