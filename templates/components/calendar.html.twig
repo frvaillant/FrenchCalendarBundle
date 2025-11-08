@@ -28,7 +28,9 @@
                             id="{{ day ? day.date | date('Ymd') }}"
                             class="calendar-bundle-day"
                             {{ day and day.isHoliday ? 'data-holiday="true"' }}
+                            {% if day and day.isHoliday %} data-holiday-name="{{ day.holidayName }}" {% endif %}
                             {{ day and day.isPublicHoliday ? 'data-public-holiday="true"' }}
+                            {% if day and day.isPublicHoliday %} data-public-holiday-name="{{ day.publicHolidayName }}" {% endif %}
                         >
                             {% if day %}
                                 {{ day.date | date('d') }}
