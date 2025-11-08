@@ -9,6 +9,8 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 class CalendarExtension extends Extension
 {
+
+
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
@@ -19,11 +21,16 @@ class CalendarExtension extends Extension
 
         $loader = new YamlFileLoader(
             $container,
-            new FileLocator(__DIR__ . '/../Resources/config')
+            new FileLocator(__DIR__ . '/../../config')
         );
 
-        // 🧩 Vérifie que ce fichier existe bien à ce chemin exact :
         $loader->load('services.yaml');
+
+        $container->prependExtensionConfig('twig_component', [
+            'defaults' => [
+                'Francoisvaillant\\CalendarBundle\\Twig\\Components\\' => '@Calendar/components/',
+            ],
+        ]);
     }
 
     public function getAlias(): string

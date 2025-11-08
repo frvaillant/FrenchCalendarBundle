@@ -3,11 +3,9 @@
 namespace Francoisvaillant\CalendarBundle;
 
 use Francoisvaillant\CalendarBundle\DependencyInjection\CalendarExtension;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 
-class CalendarBundle extends Bundle
+class CalendarBundle extends AbstractBundle
 {
     public function getContainerExtension(): ?CalendarExtension
     {
@@ -18,4 +16,5 @@ class CalendarBundle extends Bundle
     {
         return \dirname(__DIR__);
     }
+
 }

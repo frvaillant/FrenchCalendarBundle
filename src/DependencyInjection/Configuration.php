@@ -14,12 +14,10 @@ class Configuration implements ConfigurationInterface
         $treeBuilder->getRootNode()
             ->children()
                 ->scalarNode('holidays_url')
-                    ->isRequired()
-                    ->cannotBeEmpty()
+                    ->defaultValue('https://data.education.gouv.fr/api/explore/v2.1/catalog/datasets/fr-en-calendrier-scolaire/records?select=description,start_date,end_date,zones&limit=50&refine=start_date:"%%s"&refine=zones:"%%s"')
                 ->end()
                 ->scalarNode('public_holidays_url')
-                    ->isRequired()
-                    ->cannotBeEmpty()
+                    ->defaultValue('https://calendrier.api.gouv.fr/jours-feries/%%s/%%s.json')
                 ->end()
             ->end();
 

@@ -1,0 +1,57 @@
+<div class="calendar-bundle" data-controller="calendar-bundle">
+    {% for monthNumber, month in calendar %}
+        <section class="calendar-bundle__month" aria-labelledby="month-{{ monthNumber }}">
+            <h2 id="month-{{ monthNumber }}" class="calendar-bundle__month-name">
+                {{ month.name|capitalize }}
+            </h2>
+
+            <table class="calendar-bundle__table" role="grid" aria-label="Calendrier du mois de {{ month.name }}">
+                <thead>
+                <tr>
+                    <th scope="col" class="calendar-bundle__week-header">Sem.</th>
+                    {% for day in days_of_week() %}
+                        <th scope="col" class="calendar-bundle__day-header">{{ day|capitalize }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for weekNumber, days in month.weeks %}
+                    <tr class="calendar-bundle__week" data-week="{{ weekNumber }}">
+                        <th scope="row" class="calendar-bundle__week-number">{{ weekNumber }}</th>
+                        {% for day in days %}
+                            {% set dateId = day ? day.date|date('Ymd') : null %}
+                            <td
+                                    {% if dateId %}
+                                        id="{{ dateId }}"
+                                    {% endif %}
+                                    class="
+                                        calendar-bundle__day
+                                        {{ day ? '' : 'calendar-bundle__day--empty' }}
+                                        {{ day and day.isHoliday ? 'calendar-bundle__day--holiday' }}
+                                        {{ day and day.isPublicHoliday ? 'calendar-bundle__day--public-holiday' }}
+                                    "
+                                    {% if day %}
+                                        data-date="{{ day.date|date('Y-m-d') }}"
+                                        {% if day.isHoliday %}
+                                            data-holiday-name="{{ day.holidayName }}"
+                                        {% endif %}
+                                        {% if day.isPublicHoliday %}
+                                            data-public-holiday-name="{{ day.publicHolidayName }}"
+                                        {% endif %}
+                                    {% endif %}
+                            >
+                                {% if day %}
+                                    <time datetime="{{ day.date|date('Y-m-d') }}">
+                                        {{ day.date|date('j') }}
+                                    </time>
+                                {% endif %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    {% endfor %}
+</div>

@@ -5,8 +5,8 @@ services:
     public: true
 
   Francoisvaillant\CalendarBundle\:
-    resource: '../../*'
-    exclude: '../../{DependencyInjection,Entity,Tests,Kernel.php}'
+    resource: '../src/*'
+    exclude: '../src/{DependencyInjection,Entity,Tests,Kernel.php}'
 
   Francoisvaillant\CalendarBundle\Calendar\PublicHolidaysProvider:
     arguments:
