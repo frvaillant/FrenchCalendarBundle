@@ -4,6 +4,7 @@ namespace App\Tests\CalendarBundle;
 
 use Francoisvaillant\CalendarBundle\Calendar\Calendar;
 use Francoisvaillant\CalendarBundle\Calendar\DatesProvider;
+use Francoisvaillant\CalendarBundle\Calendar\Representation\Month;
 use Francoisvaillant\CalendarBundle\Enum\DaysOfWeek;
 use PHPUnit\Framework\TestCase;
 
@@ -42,9 +43,10 @@ class CalendarTest extends TestCase
         $this->assertCount(1, $months);
         $january = $months[1];
         $this->assertIsArray($january['weeks']);
-        $this->assertSame('janvier', $january['name']);
+        $this->assertTrue($january['month'] instanceof Month);
+        $this->assertTrue($january['month']->localName() === 'Janvier');
+        $this->assertTrue($january['month']->localName('en_EN') === 'January');
 
-        // Ensure Jan 1st is present among the weeks
         $found = false;
         foreach ($january['weeks'] as $week) {
             foreach ($week as $day) {

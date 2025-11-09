@@ -4,6 +4,7 @@ namespace Francoisvaillant\CalendarBundle\Calendar;
 
 use Francoisvaillant\CalendarBundle\Calendar\Builder\WeekBuilder;
 use Francoisvaillant\CalendarBundle\Calendar\Representation\Day;
+use Francoisvaillant\CalendarBundle\Calendar\Representation\Month;
 use Francoisvaillant\CalendarBundle\Calendar\Representation\Week;
 use Francoisvaillant\CalendarBundle\Enum\DaysOfWeek;
 use Francoisvaillant\CalendarBundle\Enum\MonthsOfYear;
@@ -94,15 +95,11 @@ class Calendar
                 $date = $dayInfo->getDate();
                 $monthNumber = (int)$date->format('n');
 
-                $monthEnum = MonthsOfYear::cases()[$monthNumber - 1] ?? null;
-
-                if ($monthEnum === null) {
-                    continue;
-                }
+                $MONTH = new Month((int)$date->format('Y'), $monthNumber);
 
                 if (!isset($months[$monthNumber])) {
                     $months[$monthNumber] = [
-                        'name' => $monthEnum->value,
+                        'month' => $MONTH,
                         'weeks' => [],
                     ];
                 }

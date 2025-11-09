@@ -15,3 +15,7 @@ services:
   Francoisvaillant\CalendarBundle\Calendar\HolidaysProvider:
     arguments:
       $holidaysUrl: '%calendar.holidays_url%'
+
+  Francoisvaillant\CalendarBundle\Calendar\Representation\Month:
+    autowire: false
+    autoconfigure: false
