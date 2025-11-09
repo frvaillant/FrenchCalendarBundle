@@ -2,6 +2,7 @@
 
 namespace Francoisvaillant\CalendarBundle\Calendar;
 
+use Francoisvaillant\CalendarBundle\Calendar\Builder\WeekBuilder;
 use Francoisvaillant\CalendarBundle\Calendar\Representation\Day;
 use Francoisvaillant\CalendarBundle\Calendar\Representation\Week;
 use Francoisvaillant\CalendarBundle\Enum\DaysOfWeek;
@@ -41,6 +42,8 @@ class Calendar
 
         $calendar = [];
 
+        $weekBuilder = new WeekBuilder();
+
         /**
          * @var int $weekNumber
          * @var array $dates
@@ -51,10 +54,11 @@ class Calendar
                 ->setNumber($weekNumber)
                 ->setDates($dates)
             ;
-            $calendar[$week->getNumber()] = $week->build();
+            $weekBuilder->setDates($dates);
+            $calendar[$week->getNumber()] = $weekBuilder->buildAsArray();
         }
 
-        if ($chosenWeek) {
+        if ($chosenWeek && isset($calendar[$chosenWeek])) {
             return [$chosenWeek => $calendar[$chosenWeek]];
         }
 
@@ -73,7 +77,6 @@ class Calendar
         if(!$this->dates) {
             throw new \Exception('No dates provided. use setDates() to provide dates');
         }
-
         $weeks = $this->formatAsWeeks();
         $months = [];
 
@@ -113,7 +116,7 @@ class Calendar
             }
         }
 
-        if ($chosenMonth) {
+        if ($chosenMonth && isset($months[$chosenMonth])) {
             return [$chosenMonth => $months[$chosenMonth]];
         }
 
