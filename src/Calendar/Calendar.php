@@ -18,19 +18,9 @@ class Calendar
     const AS_WEEKS  = 'weeks';
     const AS_MONTHS = 'months';
 
-    public function getDates(?int $weekNumber = null): array
-    {
-        return $weekNumber ? $this->dates[$weekNumber] : $this->dates;
-    }
-
     public function setDates(array $dates): void
     {
         $this->dates = $dates;
-    }
-
-    public function getFormat(): string
-    {
-        return $this->format;
     }
 
     public function setFormat(string $format): void

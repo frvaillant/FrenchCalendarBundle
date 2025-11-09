@@ -60,7 +60,7 @@ class PublicHolidaysProvider implements PublicHolidaysProviderInterface
      * ...
      * }
      */
-    private function fetchPublicHolidaysApi(int $year, Region $region): array
+    protected function fetchPublicHolidaysApi(int $year, Region $region): array
     {
         $client = HttpClient::create();
         $url = sprintf($this->publicHolidaysUrl, $region->value, $year);

@@ -2,15 +2,21 @@
 
 namespace Francoisvaillant\CalendarBundle\Calendar\Representation;
 
+/**
+ * This class represents a day with its properties
+ */
 class Day
 {
-
-
     private \DateTime $date;
     private int $weekNumber;
+
+    // Todo remove dayNumber
     private int $dayNumber;
+    //todo remove dayname
     private string $dayName;
+    //todo remove daynameFr
     private string $dayNameFr;
+
     private bool $isPublicHoliday;
     private ?string $publicHolidayName;
     private bool $isHoliday;
@@ -86,7 +92,7 @@ class Day
         return $this;
     }
 
-    public function getPublicHolidayName(): string
+    public function getPublicHolidayName(): ?string
     {
         return $this->publicHolidayName;
     }
@@ -108,7 +114,7 @@ class Day
         return $this;
     }
 
-    public function getHolidayName(): string
+    public function getHolidayName(): ?string
     {
         return $this->holidayName;
     }
@@ -118,8 +124,5 @@ class Day
         $this->holidayName = $holidayName;
         return $this;
     }
-
-
-
 
 }

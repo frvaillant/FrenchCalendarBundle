@@ -85,7 +85,7 @@ class HolidaysProvider implements HolidaysProviderInterface
      *
      * Fetches holidays from the API
      */
-    private function fetchHolidaysApi($year, $zone): ?array
+    protected function fetchHolidaysApi($year, $zone): ?array
     {
         $url = sprintf($this->holidaysUrl, $year, $zone->value);
         $client = HttpClient::create();
@@ -163,7 +163,8 @@ class HolidaysProvider implements HolidaysProviderInterface
      * @return array
      *
      * Returns an array of holidays flattened :
-     * "20250222" => "Vacances d'Hiver"
+     * "20251222" => "Vacances d'Hiver"
+     * "20251223" => "Vacances d'Hiver"
      */
     private function flattenHolidays(array $holidays): array
     {

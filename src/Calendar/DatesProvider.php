@@ -24,11 +24,7 @@ class DatesProvider implements DateProviderInterface
      * [
      *  '1' => [
      *      '20220101' => [
-     *          'date' => '2025-01-01',
-     *          'date_fr' => '01-01-2025',
-     *          'day_name' => 'Monday',
-     *          'day_name_fr' => 'Lundi',
-     *          'day_number' => 1,
+     *          'date' => \DateTime object,
      *          'is_public_holiday' => false,
      *          'public_holiday_name' => null,
      *          'is_holiday' => false,

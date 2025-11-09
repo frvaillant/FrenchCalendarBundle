@@ -38,6 +38,8 @@ class CalendarProvider implements CalendarInterface
      */
     public function getCalendar(Zone $zone, Region $region = Region::METROPOLE, ?int $year = null): Calendar
     {
+
+        // TODO refactor this
         $year = $year ?? (int)date('Y');
 
         $dates = $this->datesProvider->getDates($year);
