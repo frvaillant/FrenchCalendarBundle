@@ -25,10 +25,11 @@ class CalendarProvider implements CalendarInterface
 
 
     /**
-     * @param int|null $year
+     * @param Zone $zone
      * @param Region $region
+     * @param int|null $year
      *
-     * @return array
+     * @return Calendar
      *
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
@@ -39,15 +40,22 @@ class CalendarProvider implements CalendarInterface
     public function getCalendar(Zone $zone, Region $region = Region::METROPOLE, ?int $year = null): Calendar
     {
 
-        // TODO refactor this
         $year = $year ?? (int)date('Y');
 
+        /**
+         * All dates of the year
+         */
         $dates = $this->datesProvider->getDates($year);
 
+        /**
+         * Get french public holidays and french holidays
+         */
         $publicHolidays = $this->publicHolidaysProvider->getPublicHolidays($region, $year);
-
         $holidays = $this->holidaysProvider->getFlattenHolidays($zone, $year);
 
+        /**
+         * Add holidays and public holidays informations in calendar dates
+         */
         $this->addHolidaysInCalendar($dates, $publicHolidays, $holidays);
 
         $calendar = new Calendar();
@@ -63,7 +71,7 @@ class CalendarProvider implements CalendarInterface
      *
      * sets holidays and public holidays in calendar dates
      */
-    private function addHolidaysInCalendar(array &$calendar, array $publicHolidays, array $holidays): void
+    private function addHolidaysInCalendar(array &$dates, array $publicHolidays, array $holidays): void
     {
         /**
          * @var int $weekNumber
@@ -71,7 +79,7 @@ class CalendarProvider implements CalendarInterface
          *
          * Loop in a year
          */
-        foreach ($calendar as $weekNumber => &$days) {
+        foreach ($dates as $weekNumber => &$days) {
 
             /**
              * @var  string $dateKey

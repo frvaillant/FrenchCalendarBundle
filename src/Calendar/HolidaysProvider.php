@@ -84,6 +84,8 @@ class HolidaysProvider implements HolidaysProviderInterface
      * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
      *
      * Fetches holidays from the API
+     *
+     * see https://data.education.gouv.fr/explore/dataset/fr-en-calendrier-scolaire/api/?disjunctive.description&disjunctive.location&disjunctive.zones&disjunctive.annee_scolaire&disjunctive.population
      */
     protected function fetchHolidaysApi($year, $zone): ?array
     {

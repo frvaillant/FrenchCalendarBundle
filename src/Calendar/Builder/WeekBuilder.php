@@ -2,6 +2,7 @@
 
 namespace Francoisvaillant\CalendarBundle\Calendar\Builder;
 
+use Francoisvaillant\CalendarBundle\Calendar\Formattter\DateNameFormatter;
 use Francoisvaillant\CalendarBundle\Calendar\Representation\Day;
 use Francoisvaillant\CalendarBundle\Enum\DaysOfWeek;
 
@@ -46,7 +47,7 @@ class WeekBuilder
             $dayOfWeek = DaysOfWeek::from(strtolower($dayNameFr));
             $value = array_filter(
                 $this->dates,
-                fn(Day $day) => ucfirst($day->getDayNameFr()) === ucfirst($dayNameFr)
+                fn(Day $day) => ucfirst(DateNameFormatter::format($day->getDate())) === ucfirst($dayNameFr)
             );
             $week[$dayOfWeek->code()] = !empty($value) ? reset($value) : null;
         }

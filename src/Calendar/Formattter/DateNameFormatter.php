@@ -2,7 +2,7 @@
 
 namespace Francoisvaillant\CalendarBundle\Calendar\Formattter;
 
-class DayNameFormatter
+class DateNameFormatter
 {
 
     /**
@@ -12,15 +12,15 @@ class DayNameFormatter
      * Return french Day name for a given date
      *
      */
-    public static function format(\DateTime $date): string
+    public static function format(\DateTime $date, string $locale = 'fr_FR', string $pattern = 'EEEE'): string
     {
         $formatter = new \IntlDateFormatter(
-            'fr_FR',
+            $locale,
             \IntlDateFormatter::FULL,
             \IntlDateFormatter::NONE,
-            'Europe/Paris',
-            \IntlDateFormatter::GREGORIAN,
-            'EEEE'
+            null,
+            null,
+            $pattern
         );
 
         return $formatter->format($date);

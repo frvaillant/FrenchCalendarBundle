@@ -9,14 +9,6 @@ class Day
 {
     private \DateTime $date;
     private int $weekNumber;
-
-    // Todo remove dayNumber
-    private int $dayNumber;
-    //todo remove dayname
-    private string $dayName;
-    //todo remove daynameFr
-    private string $dayNameFr;
-
     private bool $isPublicHoliday;
     private ?string $publicHolidayName;
     private bool $isHoliday;
@@ -34,39 +26,6 @@ class Day
     public function setWeekNumber(int $weekNumber): self
     {
         $this->weekNumber = $weekNumber;
-        return $this;
-    }
-
-    public function getDayNumber(): int
-    {
-        return $this->dayNumber;
-    }
-
-    public function setDayNumber(int $dayNumber): self
-    {
-        $this->dayNumber = $dayNumber;
-        return $this;
-    }
-
-    public function getDayName(): string
-    {
-        return $this->dayName;
-    }
-
-    public function setDayName(string $dayName): self
-    {
-        $this->dayName = $dayName;
-        return $this;
-    }
-
-    public function getDayNameFr(): string
-    {
-        return $this->dayNameFr;
-    }
-
-    public function setDayNameFr(string $dayNameFr): self
-    {
-        $this->dayNameFr = $dayNameFr;
         return $this;
     }
 

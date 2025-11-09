@@ -2,6 +2,8 @@
 
 namespace Francoisvaillant\CalendarBundle\Calendar\Representation;
 
+use Francoisvaillant\CalendarBundle\Calendar\Formattter\DateNameFormatter;
+
 final class Month
 {
     public function __construct(
@@ -28,19 +30,28 @@ final class Month
      *
      * @throws \Exception
      *
-     * Returns the month name in the given locale. Default locale is fr_FR
+     * Returns the month name in the given locale. The default locale is fr_FR
      */
     public function localName(string $locale = 'fr_FR'): string
     {
-        $formatter = new \IntlDateFormatter($locale, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE, null, null, 'MMMM');
-        return ucfirst($formatter->format($this->toDateTime()));
+        return ucfirst(DateNameFormatter::format($this->toDateTime(), $locale, 'MMMM'));
     }
 
-    public function name(string $locale = 'fr_FR'): string
+    /**
+     * @return string
+     *
+     * @throws \Exception
+     *
+     * returns the month name in English
+     */
+    public function name(): string
     {
         return $this->toDateTime()->format('F');
     }
 
+    /**
+     * @return string
+     */
     public function __toString(): string
     {
         return sprintf('%s %d', $this->frenchName(), $this->year);

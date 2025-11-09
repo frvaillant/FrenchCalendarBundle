@@ -2,7 +2,7 @@
 namespace Francoisvaillant\CalendarBundle\Calendar;
 
 use DateTime;
-use Francoisvaillant\CalendarBundle\Calendar\Formattter\DayNameFormatter;
+use Francoisvaillant\CalendarBundle\Calendar\Formattter\DateNameFormatter;
 use Francoisvaillant\CalendarBundle\Calendar\Representation\Day;
 use Francoisvaillant\CalendarBundle\Interfaces\DateProviderInterface;
 
@@ -53,9 +53,6 @@ class DatesProvider implements DateProviderInterface
             $day = new Day();
             $day
                 ->setDate(clone $start)
-                ->setDayName($start->format('l'))
-                ->setDayNameFr(DayNameFormatter::format($start))
-                ->setDayNumber((int)$start->format('w'))
                 ->setWeekNumber($weekNumber)
                 ->setIsPublicHoliday(false)
                 ->setPublicHolidayName(null)
